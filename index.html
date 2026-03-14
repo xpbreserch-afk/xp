@@ -1,0 +1,1555 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Blueberrys Cafe — Patia, Bhubaneswar</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --ink: #1a1714;
+      --ink-soft: #3d3833;
+      --ink-muted: #7a726a;
+      --cream: #f7f2ea;
+      --cream-dark: #ede5d8;
+      --accent: #2b4c3f;
+      --accent-light: #3d6b5a;
+      --gold: #b8935a;
+      --gold-light: #d4aa74;
+      --white: #ffffff;
+      --border: rgba(26,23,20,0.1);
+      --border-strong: rgba(26,23,20,0.2);
+      --nav-h: 72px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--white);
+      color: var(--ink);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ---- UTILITY ---- */
+    .serif { font-family: 'Cormorant Garamond', serif; }
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 40px; }
+    @media (max-width: 768px) { .container { padding: 0 24px; } }
+
+    /* ---- NAV ---- */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      height: var(--nav-h);
+      display: flex; align-items: center;
+      transition: background 0.4s, box-shadow 0.4s;
+    }
+    nav.scrolled {
+      background: rgba(255,255,255,0.96);
+      box-shadow: 0 1px 0 var(--border);
+      backdrop-filter: blur(8px);
+    }
+    .nav-inner {
+      display: flex; align-items: center; justify-content: space-between;
+      width: 100%;
+    }
+    .nav-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22px; font-weight: 500; letter-spacing: 0.04em;
+      color: var(--white); text-decoration: none;
+      transition: color 0.3s;
+    }
+    nav.scrolled .nav-logo { color: var(--ink); }
+    .nav-links {
+      display: flex; align-items: center; gap: 36px; list-style: none;
+    }
+    .nav-links a {
+      font-size: 13px; font-weight: 400; letter-spacing: 0.08em;
+      text-transform: uppercase; color: rgba(255,255,255,0.85);
+      text-decoration: none; transition: color 0.2s;
+    }
+    nav.scrolled .nav-links a { color: var(--ink-muted); }
+    .nav-links a:hover { color: var(--white) !important; }
+    nav.scrolled .nav-links a:hover { color: var(--ink) !important; }
+    .nav-cta {
+      font-size: 12px; font-weight: 500; letter-spacing: 0.1em;
+      text-transform: uppercase; padding: 10px 22px;
+      border: 1px solid rgba(255,255,255,0.6); color: var(--white) !important;
+      text-decoration: none; transition: all 0.25s;
+    }
+    nav.scrolled .nav-cta {
+      border-color: var(--ink); color: var(--ink) !important;
+    }
+    .nav-cta:hover { background: var(--white); color: var(--ink) !important; }
+    nav.scrolled .nav-cta:hover { background: var(--ink); color: var(--white) !important; }
+
+    .nav-hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
+    .nav-hamburger span {
+      width: 24px; height: 1.5px; background: var(--white);
+      transition: background 0.3s;
+    }
+    nav.scrolled .nav-hamburger span { background: var(--ink); }
+    @media (max-width: 768px) {
+      .nav-links, .nav-cta { display: none; }
+      .nav-hamburger { display: flex; }
+    }
+
+    /* ---- HERO ---- */
+    #hero {
+      height: 100vh; min-height: 640px;
+      position: relative; overflow: hidden;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .hero-bg {
+      position: absolute; inset: 0;
+      background-image: url('https://images.unsplash.com/photo-1445116572660-236099ec97a0?w=1800&q=80');
+      background-size: cover; background-position: center;
+    }
+    .hero-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(160deg, rgba(10,8,6,0.72) 0%, rgba(20,16,12,0.55) 100%);
+    }
+    .hero-content {
+      position: relative; z-index: 1;
+      text-align: center; color: var(--white);
+      padding: 0 24px;
+    }
+    .hero-eyebrow {
+      font-size: 11px; font-weight: 500; letter-spacing: 0.22em;
+      text-transform: uppercase; color: var(--gold-light);
+      margin-bottom: 24px;
+    }
+    .hero-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(56px, 9vw, 104px);
+      font-weight: 300; line-height: 0.95;
+      letter-spacing: -0.01em;
+      margin-bottom: 28px;
+    }
+    .hero-title em { font-style: italic; }
+    .hero-subtitle {
+      font-size: 15px; font-weight: 300; letter-spacing: 0.04em;
+      color: rgba(255,255,255,0.75); max-width: 420px; margin: 0 auto 44px;
+    }
+    .hero-actions { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+    .btn-primary {
+      font-size: 12px; font-weight: 500; letter-spacing: 0.12em;
+      text-transform: uppercase; padding: 14px 32px;
+      background: var(--gold); color: var(--white); text-decoration: none;
+      transition: background 0.25s;
+    }
+    .btn-primary:hover { background: var(--gold-light); }
+    .btn-outline-white {
+      font-size: 12px; font-weight: 500; letter-spacing: 0.12em;
+      text-transform: uppercase; padding: 14px 32px;
+      border: 1px solid rgba(255,255,255,0.5); color: var(--white);
+      text-decoration: none; transition: all 0.25s;
+    }
+    .btn-outline-white:hover { border-color: var(--white); background: rgba(255,255,255,0.08); }
+    .hero-scroll {
+      position: absolute; bottom: 36px; left: 50%; transform: translateX(-50%);
+      display: flex; flex-direction: column; align-items: center; gap: 8px;
+      color: rgba(255,255,255,0.5); font-size: 10px; letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+    .scroll-line {
+      width: 1px; height: 40px;
+      background: linear-gradient(to bottom, rgba(255,255,255,0.5), transparent);
+      animation: scrollPulse 2s ease-in-out infinite;
+    }
+    @keyframes scrollPulse { 0%,100%{opacity:0.4} 50%{opacity:1} }
+
+    /* ---- MARQUEE STRIP ---- */
+    .strip {
+      background: var(--accent); color: rgba(255,255,255,0.7);
+      padding: 14px 0; overflow: hidden;
+      font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
+    }
+    .strip-inner {
+      display: flex; gap: 64px; animation: marquee 22s linear infinite;
+      white-space: nowrap; width: max-content;
+    }
+    @keyframes marquee { from { transform: translateX(0) } to { transform: translateX(-50%) } }
+    .strip-dot {
+      display: inline-block; width: 4px; height: 4px; border-radius: 50%;
+      background: var(--gold); vertical-align: middle; margin: 0 8px;
+    }
+
+    /* ---- SECTION SHARED ---- */
+    section { padding: 100px 0; }
+    .section-label {
+      font-size: 10px; font-weight: 500; letter-spacing: 0.24em;
+      text-transform: uppercase; color: var(--gold);
+      margin-bottom: 14px;
+    }
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(36px, 5vw, 58px);
+      font-weight: 400; line-height: 1.1;
+      color: var(--ink);
+    }
+    .section-title em { font-style: italic; }
+    .section-body {
+      font-size: 15px; font-weight: 300; line-height: 1.8;
+      color: var(--ink-muted); max-width: 480px;
+      margin-top: 20px;
+    }
+
+    /* ---- ABOUT ---- */
+    #about { background: var(--cream); }
+    .about-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;
+    }
+    @media (max-width: 900px) { .about-grid { grid-template-columns: 1fr; gap: 48px; } }
+    .about-image-wrap {
+      position: relative;
+    }
+    .about-img-main {
+      width: 100%; aspect-ratio: 4/5; object-fit: cover;
+      display: block;
+    }
+    .about-img-accent {
+      position: absolute; bottom: -28px; right: -28px;
+      width: 52%; aspect-ratio: 1;
+      object-fit: cover; border: 6px solid var(--cream);
+    }
+    @media (max-width: 768px) { .about-img-accent { display: none; } }
+    .about-stats {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 1px;
+      background: var(--border); border: 1px solid var(--border);
+      margin-top: 48px;
+    }
+    .stat-cell {
+      background: var(--cream); padding: 24px;
+    }
+    .stat-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 40px; font-weight: 400; color: var(--accent);
+      line-height: 1;
+    }
+    .stat-label {
+      font-size: 11px; font-weight: 500; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--ink-muted); margin-top: 6px;
+    }
+
+    /* ---- MENU ---- */
+    #menu { background: var(--white); }
+    .menu-tabs {
+      display: flex; gap: 0; border-bottom: 1px solid var(--border);
+      margin: 48px 0 56px; overflow-x: auto;
+    }
+    .menu-tab {
+      font-size: 12px; font-weight: 500; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--ink-muted);
+      padding: 14px 28px; cursor: pointer; border: none;
+      background: none; border-bottom: 2px solid transparent;
+      transition: all 0.2s; white-space: nowrap;
+    }
+    .menu-tab:hover { color: var(--ink); }
+    .menu-tab.active { color: var(--accent); border-bottom-color: var(--accent); }
+    .menu-panel { display: none; }
+    .menu-panel.active { display: block; }
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 1px; background: var(--border);
+      border: 1px solid var(--border);
+    }
+    .menu-card {
+      background: var(--white); padding: 28px 24px;
+      transition: background 0.2s;
+    }
+    .menu-card:hover { background: var(--cream); }
+    .menu-card-top {
+      display: flex; justify-content: space-between; align-items: flex-start;
+      gap: 12px; margin-bottom: 8px;
+    }
+    .menu-item-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 20px; font-weight: 500; color: var(--ink); line-height: 1.2;
+    }
+    .menu-item-price {
+      font-size: 14px; font-weight: 500; color: var(--gold);
+      white-space: nowrap; margin-top: 2px;
+    }
+    .menu-item-desc {
+      font-size: 13px; color: var(--ink-muted); line-height: 1.6;
+    }
+    .menu-tag {
+      display: inline-block; margin-top: 12px;
+      font-size: 9px; font-weight: 600; letter-spacing: 0.15em;
+      text-transform: uppercase; padding: 4px 10px;
+      background: var(--cream-dark); color: var(--ink-muted);
+    }
+
+    /* ---- EXPERIENCE ---- */
+    #experience { background: var(--ink); color: var(--white); }
+    #experience .section-label { color: var(--gold); }
+    #experience .section-title { color: var(--white); }
+    #experience .section-body { color: rgba(255,255,255,0.6); }
+    .exp-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.08);
+      margin-top: 64px;
+    }
+    @media (max-width: 768px) { .exp-grid { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 480px) { .exp-grid { grid-template-columns: 1fr; } }
+    .exp-card {
+      background: var(--ink); padding: 40px 32px;
+      transition: background 0.25s;
+    }
+    .exp-card:hover { background: #242018; }
+    .exp-icon {
+      width: 40px; height: 40px; margin-bottom: 24px;
+      opacity: 0.9;
+    }
+    .exp-card-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22px; font-weight: 400; color: var(--white);
+      margin-bottom: 12px;
+    }
+    .exp-card-desc {
+      font-size: 13px; font-weight: 300; line-height: 1.7;
+      color: rgba(255,255,255,0.55);
+    }
+
+    /* ---- GALLERY ---- */
+    #gallery { padding: 0; }
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-template-rows: 300px 300px;
+    }
+    @media (max-width: 900px) { .gallery-grid { grid-template-columns: repeat(2,1fr); grid-template-rows: repeat(3, 240px); } }
+    @media (max-width: 560px) { .gallery-grid { grid-template-columns: 1fr 1fr; grid-template-rows: repeat(3, 180px); } }
+    .gallery-item {
+      overflow: hidden; position: relative;
+    }
+    .gallery-item.tall { grid-row: span 2; }
+    .gallery-item img {
+      width: 100%; height: 100%; object-fit: cover;
+      transition: transform 0.6s ease;
+    }
+    .gallery-item:hover img { transform: scale(1.05); }
+    .gallery-overlay {
+      position: absolute; inset: 0;
+      background: rgba(10,8,6,0);
+      transition: background 0.3s;
+      display: flex; align-items: flex-end; padding: 20px;
+    }
+    .gallery-item:hover .gallery-overlay { background: rgba(10,8,6,0.3); }
+    .gallery-label {
+      font-size: 11px; font-weight: 500; letter-spacing: 0.16em;
+      text-transform: uppercase; color: var(--white);
+      opacity: 0; transform: translateY(8px);
+      transition: all 0.3s;
+    }
+    .gallery-item:hover .gallery-label { opacity: 1; transform: translateY(0); }
+
+    /* ---- VISIT ---- */
+    #visit { background: var(--cream); }
+    .visit-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start;
+    }
+    @media (max-width: 900px) { .visit-grid { grid-template-columns: 1fr; gap: 48px; } }
+    .visit-map {
+      width: 100%; height: 360px; border: none;
+      filter: grayscale(30%);
+    }
+    .info-block { margin-top: 36px; }
+    .info-row {
+      display: flex; gap: 20px; padding: 20px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .info-row:first-child { padding-top: 0; border-top: 1px solid var(--border); }
+    .info-icon-wrap {
+      width: 36px; flex-shrink: 0; padding-top: 2px;
+    }
+    .info-icon {
+      width: 16px; height: 16px; stroke: var(--gold); fill: none;
+      stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round;
+    }
+    .info-key {
+      font-size: 10px; font-weight: 600; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--ink-muted); margin-bottom: 4px;
+    }
+    .info-val {
+      font-size: 14px; color: var(--ink); line-height: 1.6;
+    }
+    .info-val a { color: inherit; text-decoration: none; border-bottom: 1px solid var(--border-strong); }
+
+    /* ---- TESTIMONIALS ---- */
+    #reviews { background: var(--white); }
+    .reviews-grid {
+      display: grid; grid-template-columns: repeat(3,1fr); gap: 28px;
+      margin-top: 56px;
+    }
+    @media (max-width: 900px) { .reviews-grid { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 560px) { .reviews-grid { grid-template-columns: 1fr; } }
+    .review-card {
+      background: var(--cream); padding: 32px;
+    }
+    .review-stars {
+      display: flex; gap: 3px; margin-bottom: 20px;
+    }
+    .star {
+      width: 12px; height: 12px;
+      background: var(--gold); clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+    }
+    .review-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 18px; font-weight: 400; font-style: italic;
+      color: var(--ink); line-height: 1.6; margin-bottom: 24px;
+    }
+    .review-author {
+      font-size: 11px; font-weight: 600; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--ink-muted);
+    }
+    .review-source { font-size: 11px; color: var(--gold); }
+
+    /* ---- FOOTER ---- */
+    footer { background: var(--ink-soft); color: rgba(255,255,255,0.6); }
+    .footer-top {
+      padding: 80px 0 60px;
+      display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px;
+    }
+    @media (max-width: 900px) { .footer-top { grid-template-columns: 1fr 1fr; gap: 36px; } }
+    @media (max-width: 560px) { .footer-top { grid-template-columns: 1fr; } }
+    .footer-brand-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 26px; font-weight: 400; color: var(--white);
+      margin-bottom: 14px;
+    }
+    .footer-brand-desc {
+      font-size: 13px; line-height: 1.7; max-width: 260px;
+      color: rgba(255,255,255,0.45);
+    }
+    .footer-col-title {
+      font-size: 10px; font-weight: 600; letter-spacing: 0.18em;
+      text-transform: uppercase; color: rgba(255,255,255,0.4);
+      margin-bottom: 18px;
+    }
+    .footer-links { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .footer-links a {
+      font-size: 13px; color: rgba(255,255,255,0.6);
+      text-decoration: none; transition: color 0.2s;
+    }
+    .footer-links a:hover { color: var(--white); }
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,0.08);
+      padding: 24px 0;
+      display: flex; justify-content: space-between; align-items: center;
+      font-size: 12px; gap: 16px; flex-wrap: wrap;
+    }
+    .footer-bottom a { color: inherit; text-decoration: none; }
+    .social-links { display: flex; gap: 20px; }
+    .social-links a { font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(255,255,255,0.4); text-decoration: none; transition: color 0.2s; }
+    .social-links a:hover { color: var(--white); }
+
+    /* ---- RESERVATION MODAL ---- */
+    .modal-backdrop {
+      display: none; position: fixed; inset: 0; z-index: 200;
+      background: rgba(10,8,6,0.75); align-items: center; justify-content: center;
+    }
+    .modal-backdrop.open { display: flex; }
+    .modal {
+      background: var(--white); width: 100%; max-width: 500px;
+      padding: 48px; margin: 24px; position: relative;
+    }
+    .modal-close {
+      position: absolute; top: 20px; right: 20px;
+      background: none; border: none; cursor: pointer;
+      color: var(--ink-muted); font-size: 20px; line-height: 1;
+      transition: color 0.2s;
+    }
+    .modal-close:hover { color: var(--ink); }
+    .modal-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 32px; font-weight: 400; margin-bottom: 6px;
+    }
+    .modal-sub { font-size: 13px; color: var(--ink-muted); margin-bottom: 32px; }
+    .form-group { margin-bottom: 20px; }
+    .form-label {
+      display: block; font-size: 10px; font-weight: 600; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--ink-muted); margin-bottom: 8px;
+    }
+    .form-control {
+      width: 100%; padding: 12px 16px;
+      border: 1px solid var(--border-strong); background: var(--cream);
+      font-family: 'Inter', sans-serif; font-size: 14px;
+      color: var(--ink); outline: none; transition: border-color 0.2s;
+    }
+    .form-control:focus { border-color: var(--accent); }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .form-submit {
+      width: 100%; padding: 14px;
+      background: var(--accent); color: var(--white);
+      border: none; font-family: 'Inter', sans-serif;
+      font-size: 12px; font-weight: 600; letter-spacing: 0.12em;
+      text-transform: uppercase; cursor: pointer; transition: background 0.2s;
+    }
+    .form-submit:hover { background: var(--accent-light); }
+    .form-success {
+      display: none; text-align: center; padding: 20px 0;
+      color: var(--accent); font-size: 15px;
+    }
+
+    /* ---- 3D CUPS MOCKUP SECTION ---- */
+    #cups {
+      background: var(--ink);
+      padding: 100px 0 130px;
+      overflow: hidden;
+      position: relative;
+    }
+    #cups .section-label { color: var(--gold); }
+    #cups .section-title { color: var(--white); }
+    #cups .section-body { color: rgba(255,255,255,0.55); }
+    .cups-glow {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(100px);
+      pointer-events: none;
+      z-index: 0;
+    }
+    .cups-stage {
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+      gap: 72px;
+      margin-top: 80px;
+      padding: 0 40px 20px;
+      position: relative;
+      z-index: 1;
+    }
+    @media (max-width: 680px) {
+      .cups-stage { gap: 24px; margin-top: 52px; padding: 0 12px; }
+    }
+    .cup-wrapper {
+      display: flex; flex-direction: column; align-items: center; gap: 26px;
+    }
+    .cup-wrapper--center { transform: translateY(-22px); }
+    .cup-label {
+      font-size: 10px; font-weight: 500; letter-spacing: 0.2em;
+      text-transform: uppercase; color: rgba(255,255,255,0.35);
+    }
+    @keyframes float1  { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-13px)} }
+    @keyframes float2  { 0%,100%{transform:translateY(-5px)} 50%{transform:translateY(11px)} }
+    @keyframes float3  { 0%,100%{transform:translateY(-2px)} 50%{transform:translateY(-16px)} }
+    @keyframes cupSmoke {
+      0%   { transform:translateY(0) scaleX(1); opacity:0.75; }
+      100% { transform:translateY(-30px) scaleX(1.7); opacity:0; }
+    }
+
+    /* — HOT TAKEAWAY CUP — */
+    .cup-hot {
+      position: relative; width: 84px; padding-top: 38px;
+      animation: float1 3.8s ease-in-out infinite;
+      filter: drop-shadow(-5px 12px 22px rgba(0,0,0,0.65));
+    }
+    .cup-smoke {
+      position: absolute; top: 4px; left: 50%; transform: translateX(-50%);
+      display: flex; gap: 7px;
+    }
+    .cup-smoke span {
+      display:block; width:3px; height:18px; border-radius:2px;
+      background:rgba(255,255,255,0.18);
+      animation: cupSmoke 2.2s ease-out infinite;
+    }
+    .cup-smoke span:nth-child(2){ animation-delay:.55s; height:24px; }
+    .cup-smoke span:nth-child(3){ animation-delay:1.1s; }
+    .cup-lid {
+      width: 91px; height: 18px; margin-left: -3.5px;
+      background: linear-gradient(180deg, #565656 0%, #272727 100%);
+      border-radius: 9px 9px 3px 3px;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.5), inset 0 1px 2px rgba(255,255,255,0.07);
+    }
+    .cup-body {
+      width: 84px; height: 112px;
+      background: linear-gradient(162deg, #f0ead8 0%, #e0d4bc 45%, #c6b8a0 100%);
+      border-radius: 3px 3px 13px 13px;
+      position: relative; overflow: hidden;
+      box-shadow: inset 3px 0 10px rgba(255,255,255,0.22), inset -2px 0 6px rgba(0,0,0,0.1);
+      transform: perspective(360px) rotateY(-5deg);
+    }
+    .cup-sleeve {
+      position: absolute; bottom: 18px; left:0; right:0; height:46px;
+      background: var(--accent);
+      display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px;
+      box-shadow: inset 0 2px 6px rgba(0,0,0,0.18), inset 0 -2px 4px rgba(0,0,0,0.12);
+    }
+    .cup-sleeve::before {
+      content:''; position:absolute; left:10px; right:10px; top:0; height:1px;
+      background:rgba(255,255,255,0.08);
+    }
+    .cup-brand {
+      font-family:'Cormorant Garamond',serif; font-size:11px; font-weight:600;
+      letter-spacing:0.1em; color:var(--gold-light);
+    }
+    .cup-sub {
+      font-size:6.5px; font-weight:500; letter-spacing:0.18em;
+      text-transform:uppercase; color:rgba(212,170,116,0.5);
+    }
+
+    /* — FRAPPE GLASS — */
+    .cup-frappe {
+      position: relative; padding-top: 30px;
+      animation: float2 4.3s ease-in-out infinite;
+      filter: drop-shadow(-4px 14px 22px rgba(0,0,0,0.55));
+    }
+    .frappe-outer {
+      width: 68px; height: 148px; position: relative;
+      transform: perspective(360px) rotateY(6deg);
+    }
+    .frappe-outer::before {
+      content:''; position:absolute; inset:0;
+      border:1.5px solid rgba(255,255,255,0.2);
+      border-radius:4px 4px 14px 14px;
+      background:linear-gradient(135deg,
+        rgba(255,255,255,0.17) 0%,
+        rgba(255,255,255,0.03) 50%,
+        rgba(255,255,255,0.09) 100%);
+      z-index:3; pointer-events:none;
+    }
+    .frappe-liquid {
+      position:absolute; bottom:0; left:1px; right:1px; height:124px;
+      background:linear-gradient(180deg, #4a2e14 0%, #6b4020 45%, #7c4c28 100%);
+      border-radius: 0 0 13px 13px; z-index:1;
+    }
+    .frappe-cream {
+      position:absolute; top:-3px; left:-5px; right:-5px; height:36px;
+      background:radial-gradient(ellipse at 50% 58%, #f7f3ea, #e8dfd0 60%, #d8cfc0);
+      border-radius:50% 50% 38% 38%;
+      box-shadow:0 4px 14px rgba(0,0,0,0.32); z-index:4;
+    }
+    .frappe-cream::after {
+      content:''; position:absolute; top:8px; left:50%; transform:translateX(-50%);
+      width:18px; height:7px; background:rgba(255,255,255,0.38);
+      border-radius:50%; filter:blur(4px);
+    }
+    .frappe-straw {
+      position:absolute; top:-26px; left:63%;
+      width:6px; height:136px;
+      background:linear-gradient(180deg, var(--gold-light), var(--gold) 55%, #987840);
+      border-radius:3px; z-index:5;
+      box-shadow:1px 0 6px rgba(0,0,0,0.3);
+    }
+
+    /* — CERAMIC MUG — */
+    .cup-mug {
+      position: relative; padding-top: 30px;
+      animation: float3 3.6s ease-in-out infinite;
+      filter: drop-shadow(-5px 10px 20px rgba(0,0,0,0.62));
+    }
+    .cup-mug .cup-smoke {
+      left: 42%; transform: translateX(-50%);
+    }
+    .cup-mug .cup-smoke span {
+      background: rgba(255,255,255,0.15);
+      animation: cupSmoke 2s ease-out infinite;
+    }
+    .cup-mug .cup-smoke span:nth-child(2){ animation-delay:.65s; height:22px; }
+    .mug-body {
+      width:88px; height:78px;
+      background:linear-gradient(148deg, #f7f2ea 0%, #ece4d2 52%, #d2c5ae 100%);
+      border-radius:5px 5px 8px 8px; position:relative;
+      transform:perspective(360px) rotateY(-5deg);
+      box-shadow: inset 3px 0 10px rgba(255,255,255,0.3), inset -2px 0 6px rgba(0,0,0,0.08);
+    }
+    .mug-handle {
+      position:absolute; right:-23px; top:13px;
+      width:23px; height:36px;
+      border:7px solid #d2c5ae; border-left:none;
+      border-radius:0 18px 18px 0;
+      box-shadow:3px 2px 8px rgba(0,0,0,0.22);
+    }
+    .mug-initial {
+      position:absolute; inset:0;
+      display:flex; align-items:center; justify-content:center;
+      font-family:'Cormorant Garamond',serif; font-size:36px;
+      font-weight:300; font-style:italic;
+      color:var(--accent); opacity:0.6;
+    }
+    .mug-plate {
+      width:96px; height:8px; margin-left:-4px;
+      background:linear-gradient(180deg,#c8baa2,#b0a38a);
+      border-radius:0 0 10px 10px;
+      transform:perspective(360px) rotateY(-5deg);
+    }
+    /* ---- SCROLL REVEAL ---- */
+    .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .reveal.visible { opacity: 1; transform: none; }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+  </style>
+</head>
+<body>
+
+  <!-- NAVIGATION -->
+  <nav id="navbar">
+    <div class="container nav-inner">
+      <b><a href="#hero" class="nav-logo serif" style="color:#000000; text-shadow:0 0 10px rgba(68, 134, 240, 0.13);">
+Blueberrys Cafe</a></b>
+      <ul class="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#menu">Menu</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#visit">Visit</a></li>
+      </ul>
+      <a href="#" class="nav-cta" onclick="openModal(); return false;">Reserve a Table</a>
+      <div class="nav-hamburger" onclick="toggleMobileMenu()">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <p class="hero-eyebrow">Est. 2016 &nbsp;&middot;&nbsp; Patia, Bhubaneswar</p>
+      <h1 class="hero-title serif">Where Every<br><em>Cup Tells</em><br>a Story</h1>
+      <p class="hero-subtitle">A place to slow down, sip something remarkable, and stay a little longer than you planned.</p>
+      <div class="hero-actions">
+        <a href="#menu" class="btn-primary">Explore the Menu</a>
+        <a href="#" class="btn-outline-white" onclick="openModal(); return false;">Reserve a Table</a>
+      </div>
+    </div>
+    <div class="hero-scroll">
+      <div class="scroll-line"></div>
+      <span>Scroll</span>
+    </div>
+  </section>
+
+  <!-- STRIP -->
+  <div class="strip">
+    <div class="strip-inner">
+      <span>Specialty Coffee<span class="strip-dot"></span></span>
+      <span>Board Games<span class="strip-dot"></span></span>
+      <span>Live Karaoke<span class="strip-dot"></span></span>
+      <span>Fresh Frappes<span class="strip-dot"></span></span>
+      <span>Xbox Gaming<span class="strip-dot"></span></span>
+      <span>Live Music<span class="strip-dot"></span></span>
+      <span>Artisan Desserts<span class="strip-dot"></span></span>
+      <span>Bookshelf Corner<span class="strip-dot"></span></span>
+      <!-- Duplicate for seamless loop -->
+      <span>Specialty Coffee<span class="strip-dot"></span></span>
+      <span>Board Games<span class="strip-dot"></span></span>
+      <span>Live Karaoke<span class="strip-dot"></span></span>
+      <span>Fresh Frappes<span class="strip-dot"></span></span>
+      <span>Xbox Gaming<span class="strip-dot"></span></span>
+      <span>Live Music<span class="strip-dot"></span></span>
+      <span>Artisan Desserts<span class="strip-dot"></span></span>
+      <span>Bookshelf Corner<span class="strip-dot"></span></span>
+    </div>
+  </div>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="container">
+      <div class="about-grid">
+        <div class="about-image-wrap reveal">
+          <img src="pic.jpg.jpg" alt="Blueberrys Cafe interior" class="about-img-main" />
+          <img src="tea.jpg" alt="Coffee close-up" class="about-img-accent" />
+        </div>
+        <div>
+          <p class="section-label reveal">Our Story</p>
+          <h2 class="section-title reveal reveal-delay-1">More Than a<br><em>Cafe</em></h2>
+          <p class="section-body reveal reveal-delay-2">
+            Tucked inside the heart of Patia, Blueberrys Cafe has been Bhubaneswar's most beloved third space since 2016. We built this place with a simple idea — that great coffee, honest food, and good company are all you really need.
+          </p>
+          <p class="section-body reveal reveal-delay-2" style="margin-top: 16px;">
+            From early-morning cappuccinos to late-night karaoke sessions, every corner of this cafe is designed to make you feel at home. Come as you are. Stay as long as you like.
+          </p>
+          <div class="about-stats reveal reveal-delay-3">
+            <div class="stat-cell">
+              <div class="stat-num serif">9+</div>
+              <div class="stat-label">Years of Brewing</div>
+            </div>
+            <div class="stat-cell">
+              <div class="stat-num serif">4.6</div>
+              <div class="stat-label">Google Rating</div>
+            </div>
+            <div class="stat-cell">
+              <div class="stat-num serif">60+</div>
+              <div class="stat-label">Menu Items</div>
+            </div>
+            <div class="stat-cell">
+              <div class="stat-num serif">8am</div>
+              <div class="stat-label">Opens Daily</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MENU -->
+  <section id="menu">
+    <div class="container">
+      <p class="section-label reveal">What We Serve</p>
+      <h2 class="section-title reveal reveal-delay-1">The <em>Menu</em></h2>
+      <p class="section-body reveal reveal-delay-2">Crafted with care. Made to order. Every item is a reason to return.</p>
+
+      <div class="menu-tabs reveal">
+        <button class="menu-tab active" onclick="switchTab('hot')">Hot Beverages</button>
+        <button class="menu-tab" onclick="switchTab('frappe')">Frappes</button>
+        <button class="menu-tab" onclick="switchTab('shakes')">Milkshakes</button>
+        <button class="menu-tab" onclick="switchTab('food')">Food</button>
+        <button class="menu-tab" onclick="switchTab('desserts')">Desserts</button>
+      </div>
+
+      <!-- HOT -->
+      <div id="tab-hot" class="menu-panel active">
+        <div class="menu-grid">
+          <div class="menu-card">
+            <div class="menu-card-top">
+              <div class="menu-item-name serif">Cappuccino</div>
+              <div class="menu-item-price">&#8377;120</div>
+            </div>
+            <div class="menu-item-desc">Rich espresso balanced with velvety steamed milk and a crown of thick foam.</div>
+            <span class="menu-tag">Bestseller</span>
+          </div>
+          <div class="menu-card">
+            <div class="menu-card-top">
+              <div class="menu-item-name serif">Cafe Latte</div>
+              <div class="menu-item-price">&#8377;130</div>
+            </div>
+            <div class="menu-item-desc">Smooth espresso with generous steamed milk, silky and satisfying.</div>
+          </div>
+          <div class="menu-card">
+            <div class="menu-card-top">
+              <div class="menu-item-name serif">Hot Chocolate</div>
+              <div class="menu-item-price">&#8377;140</div>
+            </div>
+            <div class="menu-item-desc">Deep, indulgent cocoa with warm milk and a dusting of fine chocolate.</div>
+            <span class="menu-tag">House Favourite</span>
+          </div>
+          <div class="menu-card">
+            <div class="menu-card-top">
+              <div class="menu-item-name serif">Americano</div>
+              <div class="menu-item-price">&#8377;100</div>
+            </div>
+            <div class="menu-item-desc">Bold espresso pulled long with hot water. Clean, full-bodied, direct.</div>
+          </div>
+          <div class="menu-card">
+            <div class="menu-card-top">
+              <div class="menu-item-name serif">Coffee Crunch</div>
+              <div class="menu-item-price">&#8377;150</div>
+            </div>
+            <div class="menu-item-desc">A layered coffee drink with an added texture element — a Blueberrys original.</div>
+            <span class="menu-tag">Signature</span>
+          </div>
+          <div class="menu-card">
+            <div class="menu-card-top">
+              <div class="menu-item-name serif">Masala Chai</div>
+              <div class="menu-item-price">&#8377;80</div>
+            </div>
+            <div class="menu-item-desc">Spiced Indian tea brewed with ginger, cardamom, and a touch of pepper.</div>
+          </div>
+          <div class="menu-card">
+            <div class="menu-card-top">
+              <div class="menu-item-name serif">Espresso</div>
+              <div class="menu-item-price">&#8377;90</div>
+            </div>
+            <div class="menu-item-desc">A straight single shot — concentrated, aromatic, and precisely extracted.</div>
+          </div>
+          <div class="menu-card">
+            <div class="menu-card-top">
+              <div class="menu-item-name serif">Coffee Bar</div>
+              <div class="menu-item-price">&#8377;160</div>
+            </div>
+            <div class="menu-item-desc">Our elevated house blend served in a specialty style — ask your server for details.</div>
+            <span class="menu-tag">Signature</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- FRAPPES -->
+      <div id="tab-frappe" class="menu-panel">
+        <div class="menu-grid">
+          <div class="menu-card">
+            <div class="menu-card-top">
+              <div class="menu-item-name serif">Dark Frappe</div>
+              <div class="menu-item-price">&#8377;180</div>
+            </div>
+            <div class="menu-item-desc">Intense dark roast blended over ice, bold and unflinching in every sip.</div>
+            <span class="menu-tag">Bestseller</span>
+          </div>
+          <div class="menu-card">
+            <div class="menu-card-top">
+              <div class="menu-item-name serif">Vanilla Frappe</div>
+              <div class="menu-item-price">&#8377;175</div>
+            </div>
+            <div class="menu-item-desc">Classic vanilla bean blended with coffee and cream for a smooth finish.</div>
+          </div>
+          <div class="menu-card">
+            <div class="menu-card-top">
+              <div class="menu-item-name serif">Choco Frappe</div>
+              <div class="menu-item-price">&#8377;180</div>
+            </div>
+            <div class="menu-item-desc">Rich chocolate blended thick with espresso, whipped cream on top.</div>
+            <span class="menu-tag">House Favourite</span>
+          </div>
+          <div class="menu-card">
+            <div class="menu-card-top">
+              <div class="menu-item-name serif">Irish Frappe</div>
+              <div class="menu-item-price">&#8377;190</div>
+            </div>
+            <div class="menu-item-desc">Irish-style coffee flavour blended cold with cream and a touch of spice.</div>
+          </div>
+          <div class="menu-card">
+            <div class="menu-card-top">
+              <div class="menu-item-name serif">Hazelnut Frappe</div>
+              <div class="menu-item-price">&#8377;185</div>
+            </div>
+            <div class="menu-item-desc">Nutty hazelnut syrup swirled through cold-blended coffee and milk.</div>
+          </div>
+          <div class="menu-card">
+            <div class="menu-card-top">
+              <div class="menu-item-name serif">BBC Frappe</div>
+              <div class="menu-item-price">&#8377;195</div>
+            </div>
+            <div class="menu-item-desc">Blueberrys' signature blend — a three-note frappe that keeps you guessing.</div>
+            <span class="menu-tag">Signature</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- SHAKES -->
+      <div id="tab-shakes" class="menu-panel">
+        <div class="menu-grid">
+          <div class="menu-card">
+            <div class="menu-card-top">
+              <div class="menu-item-name serif">Butterscotch Shake</div>
+              <div class="menu-item-price">&#8377;180</div>
+            </div>
+            <div class="menu-item-desc">Classic butterscotch swirled through cold milk and vanilla ice cream.</div>
+            <span class="menu-tag">Bestseller</span>
+          </div>
+          <div class="menu-card">
+            <div class="menu-card-top">
+              <div class="menu-item-name serif">KitKat Shake</div>
+              <div class="menu-item-price">&#8377;200</div>
+            </div>
+            <div class="menu-item-desc">Blended KitKat pieces folded into cream and milk. Dessert in a glass.</div>
+            <span class="menu-tag">House Favourite</span>
+          </div>
+          <div class="menu-card">
+            <div class="menu-card-top">
+              <div class="menu-item-name serif">Oreo Shake</div>
+              <div class="menu-item-price">&#8377;195</div>
+            </div>
+            <div class="menu-item-desc">Crushed Oreo cookies blended smooth with cold milk and ice cream.</div>
+          </div>
+          <div class="menu-card">
+            <div class="menu-card-top">
+              <div class="menu-item-name serif">Blackcurrant Shake</div>
+              <div class="menu-item-price">&#8377;175</div>
+            </div>
+            <div class="menu-item-desc">Tart blackcurrant balanced with sweet cream for a vivid, fruity shake.</div>
+          </div>
+          <div class="menu-card">
+            <div class="menu-card-top">
+              <div class="menu-item-name serif">Blueberry Shake</div>
+              <div class="menu-item-price">&#8377;185</div>
+            </div>
+            <div class="menu-item-desc">The namesake shake — fresh blueberry blended with chilled milk and cream.</div>
+            <span class="menu-tag">Signature</span>
+          </div>
+          <div class="menu-card">
+            <div class="menu-card-top">
+              <div class="menu-item-name serif">Strawberry Shake</div>
+              <div class="menu-item-price">&#8377;175</div>
+            </div>
+            <div class="menu-item-desc">Classic strawberry blended with cold milk for a light, refreshing finish.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- FOOD -->
+      <div id="tab-food" class="menu-panel">
+        <div class="menu-grid">
+          <div class="menu-card">
+            <div class="menu-card-top">
+              <div class="menu-item-name serif">Smokey Paneer Sandwich</div>
+              <div class="menu-item-price">&#8377;180</div>
+            </div>
+            <div class="menu-item-desc">Grilled paneer with smoky spices, onion, and house sauce on toasted bread.</div>
+            <span class="menu-tag">Bestseller</span>
+          </div>
+          <div class="menu-card">
+            <div class="menu-card-top">
+              <div class="menu-item-name serif">Veg Club Sandwich</div>
+              <div class="menu-item-price">&#8377;160</div>
+            </div>
+            <div class="menu-item-desc">Three-layer toasted sandwich with fresh vegetables, cheese, and herb mayo.</div>
+          </div>
+          <div class="menu-card">
+            <div class="menu-card-top">
+              <div class="menu-item-name serif">Paneer Wrap</div>
+              <div class="menu-item-price">&#8377;170</div>
+            </div>
+            <div class="menu-item-desc">Spiced cottage cheese, crisp lettuce, and mint chutney rolled tight.</div>
+            <span class="menu-tag">House Favourite</span>
+          </div>
+          <div class="menu-card">
+            <div class="menu-card-top">
+              <div class="menu-item-name serif">Penne Arrabbiata</div>
+              <div class="menu-item-price">&#8377;200</div>
+            </div>
+            <div class="menu-item-desc">Al dente penne in a fiery tomato sauce with garlic and fresh herbs.</div>
+          </div>
+          <div class="menu-card">
+            <div class="menu-card-top">
+              <div class="menu-item-name serif">Margherita Pizza</div>
+              <div class="menu-item-price">&#8377;220</div>
+            </div>
+            <div class="menu-item-desc">Thin-crust base with fresh tomato sauce, mozzarella, and basil.</div>
+          </div>
+          <div class="menu-card">
+            <div class="menu-card-top">
+              <div class="menu-item-name serif">Loaded Fries</div>
+              <div class="menu-item-price">&#8377;150</div>
+            </div>
+            <div class="menu-item-desc">Crisp golden fries topped with cheese sauce, jalapeños, and herbs.</div>
+          </div>
+          <div class="menu-card">
+            <div class="menu-card-top">
+              <div class="menu-item-name serif">Cheese Burst Pizza</div>
+              <div class="menu-item-price">&#8377;260</div>
+            </div>
+            <div class="menu-item-desc">Stuffed crust pizza loaded with four-cheese blend and house toppings.</div>
+            <span class="menu-tag">Signature</span>
+          </div>
+          <div class="menu-card">
+            <div class="menu-card-top">
+              <div class="menu-item-name serif">Garlic Bread</div>
+              <div class="menu-item-price">&#8377;110</div>
+            </div>
+            <div class="menu-item-desc">Toasted baguette with garlic herb butter, served warm with dip.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- DESSERTS -->
+      <div id="tab-desserts" class="menu-panel">
+        <div class="menu-grid">
+          <div class="menu-card">
+            <div class="menu-card-top">
+              <div class="menu-item-name serif">Blueberry Cheesecake</div>
+              <div class="menu-item-price">&#8377;180</div>
+            </div>
+            <div class="menu-item-desc">The house cheesecake — creamy, dense, and crowned with fresh blueberry compote.</div>
+            <span class="menu-tag">Signature</span>
+          </div>
+          <div class="menu-card">
+            <div class="menu-card-top">
+              <div class="menu-item-name serif">Brownie with Ice Cream</div>
+              <div class="menu-item-price">&#8377;160</div>
+            </div>
+            <div class="menu-item-desc">Warm fudgy chocolate brownie paired with a scoop of vanilla ice cream.</div>
+            <span class="menu-tag">Bestseller</span>
+          </div>
+          <div class="menu-card">
+            <div class="menu-card-top">
+              <div class="menu-item-name serif">Waffles</div>
+              <div class="menu-item-price">&#8377;170</div>
+            </div>
+            <div class="menu-item-desc">Crisp Belgian-style waffles served with maple syrup, fruit, and cream.</div>
+          </div>
+          <div class="menu-card">
+            <div class="menu-card-top">
+              <div class="menu-item-name serif">Chocolate Lava Cake</div>
+              <div class="menu-item-price">&#8377;175</div>
+            </div>
+            <div class="menu-item-desc">Molten dark chocolate center with a delicate sponge shell. Served hot.</div>
+            <span class="menu-tag">House Favourite</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3D CUPS MOCKUP -->
+  <section id="cups">
+    <div class="cups-glow" style="width:520px;height:520px;background:rgba(43,76,63,0.2);top:-5%;left:-8%;"></div>
+    <div class="cups-glow" style="width:380px;height:380px;background:rgba(184,147,90,0.1);bottom:5%;right:2%;"></div>
+    <div class="container" style="position:relative;z-index:1;">
+      <p class="section-label reveal">Served with Pride</p>
+      <h2 class="section-title reveal reveal-delay-1">Every <em>Cup</em>, a Statement</h2>
+      <p class="section-body reveal reveal-delay-2">Handcrafted drinks in signature Blueberrys style — because presentation is part of the experience.</p>
+    </div>
+    <div class="cups-stage reveal reveal-delay-3">
+
+      <!-- HOT COFFEE CUP -->
+      <div class="cup-wrapper">
+        <div>
+          <div class="cup-hot">
+            <div class="cup-smoke"><span></span><span></span><span></span></div>
+            <div class="cup-lid"></div>
+            <div class="cup-body">
+              <div class="cup-sleeve">
+                <span class="cup-brand">Blueberrys</span>
+                <span class="cup-sub">Cafe · Patia</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <p class="cup-label">Hot Coffee</p>
+      </div>
+
+      <!-- FRAPPE GLASS -->
+      <div class="cup-wrapper cup-wrapper--center">
+        <div>
+          <div class="cup-frappe">
+            <div class="frappe-outer">
+              <div class="frappe-liquid"></div>
+              <div class="frappe-cream"></div>
+              <div class="frappe-straw"></div>
+            </div>
+          </div>
+        </div>
+        <p class="cup-label">Dark Frappe</p>
+      </div>
+
+      <!-- CERAMIC MUG -->
+      <div class="cup-wrapper">
+        <div>
+          <div class="cup-mug">
+            <div class="cup-smoke"><span></span><span></span></div>
+            <div class="mug-body">
+              <div class="mug-handle"></div>
+              <div class="mug-initial">B</div>
+            </div>
+            <div class="mug-plate"></div>
+          </div>
+        </div>
+        <p class="cup-label">Artisan Latte</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section id="experience">
+    <div class="container">
+      <div style="max-width: 560px;">
+        <p class="section-label reveal">Beyond the Cup</p>
+        <h2 class="section-title reveal reveal-delay-1">An <em>Experience</em><br>Worth Returning For</h2>
+        <p class="section-body reveal reveal-delay-2">Blueberrys is built for those who want more than a takeaway. Settle in and discover what makes this place genuinely different.</p>
+      </div>
+      <div class="exp-grid">
+        <div class="exp-card reveal">
+          <svg class="exp-icon" viewBox="0 0 40 40" fill="none" stroke="var(--gold)" stroke-width="1.5">
+            <rect x="6" y="14" width="28" height="20" rx="2"/>
+            <path d="M14 14v-4a6 6 0 0 1 12 0v4"/>
+            <circle cx="20" cy="24" r="3"/>
+          </svg>
+          <div class="exp-card-title serif">Board Games</div>
+          <div class="exp-card-desc">A curated collection of board games available for your table. The perfect excuse to stay another hour.</div>
+        </div>
+        <div class="exp-card reveal reveal-delay-1">
+          <svg class="exp-icon" viewBox="0 0 40 40" fill="none" stroke="var(--gold)" stroke-width="1.5">
+            <rect x="4" y="10" width="32" height="20" rx="2"/>
+            <path d="M14 22h4M10 26h20M28 18h-4"/>
+            <circle cx="14" cy="18" r="1.5" fill="var(--gold)"/>
+          </svg>
+          <div class="exp-card-title serif">Xbox 360 Gaming</div>
+          <div class="exp-card-desc">Challenge your friends on the in-house Xbox setup. Gaming meets great coffee — finally.</div>
+        </div>
+        <div class="exp-card reveal reveal-delay-2">
+          <svg class="exp-icon" viewBox="0 0 40 40" fill="none" stroke="var(--gold)" stroke-width="1.5">
+            <path d="M12 28s0-12 8-12 8 12 8 12"/>
+            <circle cx="20" cy="12" r="4"/>
+            <path d="M8 34h24M20 28v6"/>
+          </svg>
+          <div class="exp-card-title serif">Live Karaoke</div>
+          <div class="exp-card-desc">Regular karaoke nights that transform the cafe into your personal stage. No audition required.</div>
+        </div>
+        <div class="exp-card reveal">
+          <svg class="exp-icon" viewBox="0 0 40 40" fill="none" stroke="var(--gold)" stroke-width="1.5">
+            <rect x="8" y="6" width="18" height="24" rx="1"/>
+            <path d="M14 12h6M14 16h6M14 20h4"/>
+            <path d="M26 10h6v24H14"/>
+          </svg>
+          <div class="exp-card-title serif">Bookshelf Corner</div>
+          <div class="exp-card-desc">Browse, read, or leave behind a title. Our bookshelf is open to all, always free.</div>
+        </div>
+        <div class="exp-card reveal reveal-delay-1">
+          <svg class="exp-icon" viewBox="0 0 40 40" fill="none" stroke="var(--gold)" stroke-width="1.5">
+            <path d="M20 8v24M12 14l8-6 8 6"/>
+            <path d="M8 32h24M16 22h8"/>
+            <circle cx="20" cy="18" r="3"/>
+          </svg>
+          <div class="exp-card-title serif">Live Music</div>
+          <div class="exp-card-desc">Acoustic performances and live sets that set the mood just right on select evenings.</div>
+        </div>
+        <div class="exp-card reveal reveal-delay-2">
+          <svg class="exp-icon" viewBox="0 0 40 40" fill="none" stroke="var(--gold)" stroke-width="1.5">
+            <path d="M20 34c-8-6-14-12-14-18a14 14 0 0 1 28 0c0 6-6 12-14 18z"/>
+            <circle cx="20" cy="16" r="4"/>
+          </svg>
+          <div class="exp-card-title serif">Great Location</div>
+          <div class="exp-card-desc">Steps from KIIT University, right in the pulse of Patia. Easy to find, hard to leave.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GALLERY -->
+  <section id="gallery" style="padding:50px 20px; background:#f8f8f8;">
+
+<div style="
+column-count:4;
+column-gap:16px;
+max-width:1000px;
+margin:auto;
+">
+
+<div style="break-inside:avoid; margin-bottom:16px; border-radius:14px; overflow:hidden;">
+<img src="blue d.jpg" loading="lazy" style="width:100%; display:block; border-radius:14px;">
+</div>
+
+<div style="break-inside:avoid; margin-bottom:16px; border-radius:14px; overflow:hidden;">
+<img src="cheese bread.jpg" loading="lazy" style="width:100%; display:block; border-radius:14px;">
+</div>
+
+<div style="break-inside:avoid; margin-bottom:16px; border-radius:14px; overflow:hidden;">
+<img src="sand.jpg" loading="lazy" style="width:100%; display:block; border-radius:14px;">
+</div>
+
+<div style="break-inside:avoid; margin-bottom:16px; border-radius:14px; overflow:hidden;">
+<img src="unnamed (2).jpg" loading="lazy" style="width:100%; display:block; border-radius:14px;">
+</div>
+
+<div style="break-inside:avoid; margin-bottom:16px; border-radius:14px; overflow:hidden;">
+<img src="https://images.unsplash.com/photo-1572490122747-3968b75cc699?w=600&q=80" loading="lazy" style="width:100%; display:block; border-radius:14px;">
+</div>
+
+<div style="break-inside:avoid; margin-bottom:16px; border-radius:14px; overflow:hidden;">
+<img src="p.jpg" loading="lazy" style="width:100%; display:block; border-radius:14px;">
+</div>
+
+<div style="break-inside:avoid; margin-bottom:16px; border-radius:14px; overflow:hidden;">
+<img src="unnamed (4).jpg" loading="lazy" style="width:100%; display:block; border-radius:14px;">
+</div>
+
+<div style="break-inside:avoid; margin-bottom:16px; border-radius:14px; overflow:hidden;">
+<img src="unnamed (5).jpg" loading="lazy" style="width:100%; display:block; border-radius:14px;">
+</div>
+
+</div>
+
+</section>
+
+  <!-- REVIEWS -->
+  <section id="reviews">
+    <div class="container">
+      <p class="section-label reveal">Guests Say</p>
+      <h2 class="section-title reveal reveal-delay-1">Voices We're<br><em>Proud Of</em></h2>
+      <div class="reviews-grid">
+        <div class="review-card reveal">
+          <div class="review-stars">
+            <div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div>
+          </div>
+          <div class="review-text serif">"The best cafe in Bhubaneswar, hands down. The BBC frappe alone is worth the trip. And the board games are such a nice touch."</div>
+          <div class="review-author">Ritika M.</div>
+          <div class="review-source">Google Reviews</div>
+        </div>
+        <div class="review-card reveal reveal-delay-1">
+          <div class="review-stars">
+            <div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div>
+          </div>
+          <div class="review-text serif">"Came for a coffee, stayed for four hours playing board games. The place just has a vibe that you don't find easily in Patia."</div>
+          <div class="review-author">Soumya P.</div>
+          <div class="review-source">Zomato</div>
+        </div>
+        <div class="review-card reveal reveal-delay-2">
+          <div class="review-stars">
+            <div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div>
+          </div>
+          <div class="review-text serif">"Karaoke nights here are absolutely legendary. Great food, great people, and the staff make you feel genuinely welcome every single time."</div>
+          <div class="review-author">Arjun K.</div>
+          <div class="review-source">Google Reviews</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- VISIT -->
+  <section id="visit">
+    <div class="container">
+      <div class="visit-grid">
+        <div>
+          <p class="section-label reveal">Find Us</p>
+          <h2 class="section-title reveal reveal-delay-1">Come <em>Visit</em></h2>
+          <p class="section-body reveal reveal-delay-2">We're open seven days a week. Walk in any time, or reserve a table for a more relaxed evening.</p>
+
+          <div class="info-block reveal reveal-delay-2">
+            <div class="info-row">
+              <div class="info-icon-wrap">
+                <svg class="info-icon" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
+              </div>
+              <div>
+                <div class="info-key">Address</div>
+                <div class="info-val">22, Infocity Avenue, KIIT University Site 1,<br>Patia, Bhubaneswar — 751 024, Odisha</div>
+              </div>
+            </div>
+            <div class="info-row">
+              <div class="info-icon-wrap">
+                <svg class="info-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              </div>
+              <div>
+                <div class="info-key">Hours</div>
+                <div class="info-val">Monday – Sunday<br>8:30 AM – 11:00 PM</div>
+              </div>
+            </div>
+            <div class="info-row">
+              <div class="info-icon-wrap">
+                <svg class="info-icon" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.27h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.91a16 16 0 0 0 6 6l.95-.95a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.73 16.92z"/></svg>
+              </div>
+              <div>
+                <div class="info-key">Reservations</div>
+                <div class="info-val"><a href="tel:+917684052423">+91 76840 52423</a></div>
+              </div>
+            </div>
+            <div class="info-row">
+              <div class="info-icon-wrap">
+                <svg class="info-icon" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+              </div>
+              <div>
+                <div class="info-key">Delivery</div>
+                <div class="info-val">Available on Zomato and Swiggy</div>
+              </div>
+            </div>
+          </div>
+
+          <a href="#" onclick="openModal(); return false;" class="btn-primary" style="display:inline-block; margin-top: 36px;">Reserve a Table</a>
+        </div>
+
+        <div class="reveal reveal-delay-1">
+          <iframe 
+src="https://www.google.com/maps?q=Blueberrys+Cafe+Patia+Bhubaneswar&output=embed"
+width="100%" 
+height="360" 
+style="border:0;" 
+allowfullscreen="" 
+loading="lazy">
+</iframe>
+
+          <div style="margin-top: 24px; display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+            <a href="https://zomato.com" target="_blank" style="display:block; padding: 16px; background: var(--cream-dark); text-align: center; text-decoration: none; font-size: 12px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink); transition: background 0.2s;">
+              Order on Zomato
+            </a>
+            <a href="https://swiggy.com" target="_blank" style="display:block; padding: 16px; background: var(--cream-dark); text-align: center; text-decoration: none; font-size: 12px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink); transition: background 0.2s;">
+              Order on Swiggy
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <div class="footer-top">
+        <div>
+          <div class="footer-brand-name serif">Blueberrys Cafe</div>
+          <p class="footer-brand-desc">A place to slow down and enjoy the moment. Coffee, food, games, and music in the heart of Patia, Bhubaneswar.</p>
+        </div>
+        <div>
+          <div class="footer-col-title">Menu</div>
+          <ul class="footer-links">
+            <li><a href="#menu" onclick="switchTab('hot')">Hot Beverages</a></li>
+            <li><a href="#menu" onclick="switchTab('frappe')">Frappes</a></li>
+            <li><a href="#menu" onclick="switchTab('shakes')">Milkshakes</a></li>
+            <li><a href="#menu" onclick="switchTab('food')">Food</a></li>
+            <li><a href="#menu" onclick="switchTab('desserts')">Desserts</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer-col-title">Explore</div>
+          <ul class="footer-links">
+            <li><a href="#about">About Us</a></li>
+            <li><a href="#experience">Experience</a></li>
+            <li><a href="#gallery">Gallery</a></li>
+            <li><a href="#reviews">Reviews</a></li>
+            <li><a href="#visit">Visit</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer-col-title">Contact</div>
+          <ul class="footer-links">
+            <li><a href="tel:+917684052423">+91 76840 52423</a></li>
+            <li><a href="#">8:30 AM – 11:00 PM</a></li>
+            <li><a href="#">Patia, Bhubaneswar</a></li>
+            <li><a href="#">751 024, Odisha</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>&copy; 2026 Blueberrys Cafe. All rights reserved.</span>
+        <div class="social-links">
+          <a href="#" target="_blank">Instagram</a>
+          <a href="#" target="_blank">Facebook</a>
+          <a href="#" target="_blank">Zomato</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- RESERVATION MODAL -->
+  <div class="modal-backdrop" id="modal" onclick="handleBackdropClick(event)">
+    <div class="modal">
+      <button class="modal-close" onclick="closeModal()">&times;</button>
+      <h2 class="modal-title serif">Reserve a Table</h2>
+      <p class="modal-sub">We'll confirm your booking via phone. Walk-ins always welcome.</p>
+      <div id="reserve-form">
+        <div class="form-group">
+          <label class="form-label">Full Name</label>
+          <input type="text" class="form-control" placeholder="Your name" id="r-name" />
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Phone Number</label>
+            <input type="tel" class="form-control" placeholder="+91 00000 00000" id="r-phone" />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Guests</label>
+            <select class="form-control" id="r-guests">
+              <option>2 guests</option>
+              <option>3 guests</option>
+              <option>4 guests</option>
+              <option>5 guests</option>
+              <option>6+ guests</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Date</label>
+            <input type="date" class="form-control" id="r-date" />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Time</label>
+            <select class="form-control" id="r-time">
+              <option>9:00 AM</option>
+              <option>11:00 AM</option>
+              <option>1:00 PM</option>
+              <option>3:00 PM</option>
+              <option>5:00 PM</option>
+              <option>7:00 PM</option>
+              <option>9:00 PM</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Special Requests</label>
+          <textarea class="form-control" rows="3" placeholder="Occasion, dietary needs, seating preference..." id="r-notes"></textarea>
+        </div>
+        <button class="form-submit" onclick="submitReservation()">Confirm Reservation</button>
+      </div>
+      <div class="form-success" id="form-success">
+        <div style="font-family: 'Cormorant Garamond', serif; font-size: 28px; color: var(--accent); margin-bottom: 12px;">Reservation Received</div>
+        <p style="font-size: 14px; color: var(--ink-muted);">We'll call you at the number provided to confirm your booking.</p>
+        <p style="font-size: 13px; color: var(--ink-muted); margin-top: 8px;">See you soon at Blueberrys.</p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Nav scroll
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      navbar.classList.toggle('scrolled', window.scrollY > 60);
+    });
+
+    // Scroll reveal
+    const revealEls = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.12 });
+    revealEls.forEach(el => observer.observe(el));
+
+    // Menu tabs
+    function switchTab(id) {
+      document.querySelectorAll('.menu-tab').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.menu-panel').forEach(p => p.classList.remove('active'));
+      document.getElementById('tab-' + id).classList.add('active');
+      const tabs = ['hot','frappe','shakes','food','desserts'];
+      const idx = tabs.indexOf(id);
+      if (idx >= 0) document.querySelectorAll('.menu-tab')[idx].classList.add('active');
+    }
+
+    // Modal
+    function openModal() {
+      document.getElementById('modal').classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeModal() {
+      document.getElementById('modal').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+    function handleBackdropClick(e) {
+      if (e.target === document.getElementById('modal')) closeModal();
+    }
+
+    function submitReservation() {
+      const name = document.getElementById('r-name').value.trim();
+      const phone = document.getElementById('r-phone').value.trim();
+      if (!name || !phone) {
+        alert('Please enter your name and phone number.');
+        return;
+      }
+      document.getElementById('reserve-form').style.display = 'none';
+      document.getElementById('form-success').style.display = 'block';
+      setTimeout(closeModal, 3500);
+      setTimeout(() => {
+        document.getElementById('reserve-form').style.display = 'block';
+        document.getElementById('form-success').style.display = 'none';
+        document.getElementById('r-name').value = '';
+        document.getElementById('r-phone').value = '';
+        document.getElementById('r-notes').value = '';
+      }, 4000);
+    }
+
+    function toggleMobileMenu() {
+      // Basic mobile menu toggle — could be expanded
+      const links = document.querySelector('.nav-links');
+      const cta = document.querySelector('.nav-cta');
+      if (links) {
+        const visible = links.style.display === 'flex';
+        links.style.display = visible ? 'none' : 'flex';
+        links.style.flexDirection = 'column';
+        links.style.position = 'absolute';
+        links.style.top = '72px';
+        links.style.left = '0';
+        links.style.right = '0';
+        links.style.background = 'rgba(255,255,255,0.98)';
+        links.style.padding = '24px 40px';
+        links.style.gap = '20px';
+        links.style.borderTop = '1px solid rgba(26,23,20,0.1)';
+        if (!visible) {
+          document.querySelectorAll('.nav-links a').forEach(a => a.style.color = 'var(--ink)');
+        }
+      }
+    }
+
+    // Set min date on date input
+    const dateInput = document.getElementById('r-date');
+    if (dateInput) {
+      const today = new Date().toISOString().split('T')[0];
+      dateInput.setAttribute('min', today);
+      dateInput.value = today;
+    }
+  </script>
+</body>
+</html>
